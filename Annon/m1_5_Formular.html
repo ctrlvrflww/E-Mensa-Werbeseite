@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Formula</title>
+</head>
+<body>
+    <form action="daten.php" method="post">
+        <fieldset>
+            <legend>Anmeldung</legend>
+            Anrede
+            <br>
+            <input type="radio" name="Anrede" value="male"> Herr <br>
+            <input type="radio" name="Anrede" value="female"> Frau <br> <br>
+            <label for="vorname">Vorname<sup>*</sup></label>
+            <br>
+            <input type="text" id="vorname" name="vorname" placeholder="Bitte geben Sie ihren Vornamen ein" required>
+            <br>
+            <label for="nachname">Nachname<sup>*</sup></label>
+            <br>
+            <input type="text" id="nachname" name="nachname" placeholder="Bitte geben Sie ihren Nachnamen ein" required>
+            <br>
+            <label for="mail">E-Mail<sup>*</sup></label>
+            <br>
+            <input type="text" id="mail" name="mail-adresse" placeholder="Bitte geben Sie ihren E-Mail ein" required>
+            <br>
+            <label for="interval">Benachrichtungsinterval</label>
+            <br>
+            <select id="interval">
+                <option value="1">Tag</option>
+                <option value="2">Woche</option>
+                <option value="3">Monat</option>
+            </select>
+            <br>
+            <input type="checkbox"> Datenschutzhinweise gelesen
+            <br>
+            <br>
+            <input type="submit" value="Abschicken">
+            <br>
+            <sup>*</sup>Eingaben sind Pflicht
+        </fieldset>
+    </form>
+
+</body>
+</html>
