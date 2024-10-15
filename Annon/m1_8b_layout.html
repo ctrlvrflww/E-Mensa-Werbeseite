@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gridy</title>
+    <style>
+        #grid-oben {
+            display: grid;
+            grid-template-rows: 33% auto 33%;
+            grid-gap: 10px;
+        }
+        #grid-mitte {
+            display: grid;
+            grid-template-columns: 33% auto 33%;
+            grid-gap: 10px;
+        }
+        #grid-unten {
+            display: grid;
+            grid-template-columns: 33% auto 33%;
+            grid-gap: 10px;
+        }
+        #grid-oben > div {
+            background-color: cadetblue;
+        }
+        #grid-mitte > div {
+            background-color: cadetblue;
+        }
+        #grid-unten > div {
+            background-color: cadetblue;
+            grid-column: 2;
+        }
+    </style>
+</head>
+<body>
+    <div id="grid-oben">
+        <div>Oben links</div>
+        <div>Oben</div>
+        <div>Oben rechts</div>
+    </div>
+    <br>
+    <div id="grid-mitte">
+        <div>Links</div>
+        <div>Mitte</div>
+        <div>Rechts</div>
+    </div>
+    <br>
+    <div id="grid-unten">
+        <div>Mitte</div>
+    </div>
+</body>
+</html>
