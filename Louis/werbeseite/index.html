@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Ihre E-Mensa</title>
+
+    <style>
+        body {
+            font-family: arial, sans-serif;
+        }
+
+        a{
+            color: cadetblue;
+        }
+
+        header {
+            display:flex;
+            border-bottom: 1px solid black;
+        }
+
+        .Logo{
+            padding-left: 2%;
+            padding-right: 2%;
+            white-space: nowrap;
+        }
+
+        .Reiter{
+            width: 60%;
+        }
+
+        header div {
+            border:1px solid black;
+            margin-right: 2%;
+            margin-bottom: 1.5%;
+            height: 20%;
+        }
+
+        header ul {
+            display:flex;
+        }
+
+        header ul li {
+            list-style-type: none;
+            padding-left: 2%;
+            padding-right: 2%;
+            white-space: nowrap;
+        }
+
+        main {
+            margin-left: 25%;
+            margin-right: 25%;
+            margin-bottom: 2%;
+            margin-top:2%;
+            border:1px solid black;
+        }
+
+        main p {
+            text-align: justify;
+        }
+
+        main div{
+            margin:5%;
+        }
+
+        #wichtigfüruns div{
+            font-size: 17px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .text {
+            border:1px solid black;
+            padding: 2%;
+        }
+
+        .zahlen {
+            display: flex;
+            list-style-type: none;
+            justify-content: center;
+        }
+        .zahlen li {
+            padding:3%;
+            font-size: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .newsletter {
+            font-size: 15px;
+            color: gray;
+            display:flex;
+            flex-direction: row;
+            flex-wrap:wrap;
+            gap: 10px;
+            white-space: nowrap;
+        }
+
+        .newsletter div{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .newsletter .form_datenschutz{
+            flex-direction: row;
+        }
+
+        .newsletter .form_submit{
+            align-self: flex-end;
+        }
+
+        .newsletter div{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .byebye{
+            text-align: center;
+        }
+
+        footer{
+            border-top: 1px solid black;
+        }
+
+        footer ul{
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+        footer li{
+            padding-left: 2%;
+            padding-right:2%;
+            border-right:1px solid grey;
+        }
+
+        #speisen table{
+            border:1px solid black;
+            border-collapse: collapse;
+        }
+        #speisen th{
+            border:1px dotted lightgray;
+        }
+
+        #speisen thead{
+            border-bottom:1px solid black;
+        }
+        #speisen tfoot{
+            border-top:1px solid black;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<header>
+    <div class="Logo">
+        <p class="Logo">E-Mensa Logo</p>
+    </div>
+
+    <div class="Reiter">
+        <ul>
+            <li><a href="#ankündigung">Ankündigung</a></li>
+            <li><a href="#speisen">Speisen</a></li>
+            <li><a href="#zahlen">Zahlen</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="#wichtigfüruns">Wichtig für uns</a></li>
+        </ul>
+    </div>
+
+</header>
+
+<main>
+    <div id="ankündigung">
+        <h1>Bald gibt es Essen auch online ;)</h1>
+
+                <p class="text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+    </div>
+
+    <div id="speisen">
+        <h1 >Köstlichkeiten, die Sie erwarten</h1>
+        <div  class="essensplan">
+            <table>
+                <thead>
+                <tr>
+                    <th> </th>
+                    <th>Preis intern</th>
+                    <th>Preis extern</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th>Rindfleisch mit Bambus, Kaiserschoten und rotem Paprika, dazu Mie Nudeln</th>
+                    <th>3,50€</th>
+                    <th>6,20€</th>
+                </tr>
+                <tr>
+                    <th>Spinatrisotto mit kleinen Samosateigecken und gemischter Salat</th>
+                    <th>2,90€</th>
+                    <th>5,30€</th>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <th>...</th>
+                    <th>...</th>
+                    <th>...</th>
+                </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+    <div id="zahlen">
+        <h1>E-Mensa in Zahlen</h1>
+        <ul class="zahlen">
+            <li>10.000 Besuche</li>
+            <li>500 Anmeldungen zum Newsletter</li>
+            <li>2 Speisen</li>
+        </ul>
+    </div>
+
+    <div id="kontakt">
+        <h1>Interesse geweckt? Wir informieren Sie!</h1>
+            <form method="post" id="person" class="newsletter">
+                <div>
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="form_name">
+                                    <label for="name">Name:</label>
+                                    <input type="text" name="vorname" id="name" maxlength="30">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form_email">
+                                    <label for="email">Ihre E-Mail:</label>
+                                    <input type="text" id="email">
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form_sprache">
+                                    <label for="newsletter">Newsletter bitte in:</label>
+                                    <select name="newsletter" size="1" id="newsletter">
+                                        <option>Deutsch</option>
+                                        <option>Englisch</option>
+                                        <option>Spanisch</option>
+                                    </select>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <div class="form_datenschutz">
+                                    <input type="checkbox" name="datenschutzhinweise" value="gelesen" id="check1">
+                                    <label for="check1">Den Datenschutzbestimmungen stimme ich zu</label>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form_submit">
+                                    <input type="submit" value="Zum Newsletter anmelden">
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+            </form>
+    </div>
+
+    <div id="wichtigfüruns">
+        <h1>Das ist uns wichtig</h1>
+        <div>
+            <ul>
+                <li>Beste frische saisonale Zutaten</li>
+                <li>Ausgewogene abwechslungsreiche Gerichte</li>
+                <li>Sauberkeit</li>
+            </ul>
+        </div>
+    </div>
+
+    <h1 class="byebye">Wir freuen uns auf Ihren Besuch!</h1>
+</main>
+
+<footer>
+    <ul>
+        <li>(C) E-Mensa GmbH</li>
+        <li>ashdlkasjhd</li>
+        <li> <a href="beispielseite/Impressum.de">Impressum</a></li>
+    </ul>
+</footer>
+
+</body>
+</html>
