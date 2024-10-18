@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Newsletteranmeldung</title>
+</head>
+<body>
+<h1>Anmeldung</h1>
+<form action="formdata.html" method="post" id="person">
+
+  <label class="h2">Anrede</label> <br>
+  <input type="radio" id="frau" name="Anrede" value="Frau">
+  <label for="frau">Frau</label> <br>
+  <input type="radio" id="herr" name="Anrede" value="Herr">
+  <label for="herr">Herr</label> <br> <br>
+  <label for="vorname">Vorname*</label> <br>
+  <input type="text" name="vorname" id="vorname" maxlength="30" required> <br> <br>
+  <label for="nachname">Nachname*</label> <br>
+  <input type="text" name="nachname" id="nachname" maxlength="30" required> <br> <br>
+  <label for="email">E-Mail*</label> <br>
+  <input type="text" name="email" id="email" maxlength="30" required> <br> <br>
+  <label for="benachrichtigungsintervall">Benachrichtigungsinterval <br>
+    <select name="interval" size="1" id="benachrichtigungsintervall">
+      <option>Tag</option>
+      <option>Woche</option>
+      <option>Monat</option>
+    </select>
+  </label>
+  <br> <br>
+  <input type="checkbox" name="datenschutzhinweise" value="gelesen" id="check1">
+  <label for="check1">Datenschutzhinweise gelesen</label>
+  <br> <br>
+  <input type="submit" value="Abschicken">
+
+  <p>*) Eingaben sind Pflicht</p>
+
+</form>
+
+
+</body>
+</html>
