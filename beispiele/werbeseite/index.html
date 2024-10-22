@@ -5,7 +5,7 @@
 - Team 301
 -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <title>Ihre E-Mensa</title>
@@ -43,11 +43,18 @@
             padding: 5px;
         }
         table {
-            border-color: #000000;
+            border:2px solid black;
             /*color: darkgrey;*/
             border-collapse: collapse;
-            border-width: medium;
+
         }
+        th{
+            border:1px solid lightgray;
+        }
+        td{
+            border:1px solid lightgray;
+        }
+
         tr:nth-child(1) {
             border: 3px solid black;
         }
@@ -102,7 +109,7 @@
 <body>
     <header class="grid-3">
         <div>
-            <img src="logo-studentenwerk.png" alt="E-Mensa Logo" width="100px">
+            <img src="logo-studentenwerk.png" alt="E-Mensa Logo" width="100">
         </div>
         <div id="top">
             <a href="#ankündigung"> Ankündigung</a>
@@ -124,7 +131,7 @@
         </div>
         <div class="mitte" id="speisen">
             <h2>Köstlichkeiten, die Sie erwarten</h2>
-            <table border = 1>
+            <table>
                 <tr><th></th><th>Preis intern</th><th>Preis extern</th></tr>
                 <tr><td>Rindfleisch mit Bambus, Kaiserschoten und rotem Paprika, dazu Mie Nudeln</td><td>3,50</td><td>6,20</td></tr>
                 <tr><td>Spinatrisotto mit kleinen Samosateigecken und gemischter Salat</td><td>2,90</td><td>5,30</td></tr>
