@@ -6,7 +6,14 @@
 -->
 <?php
 include('gerichte.php');
-include('m2_8a_accesslog.php')
+include('m2_8a_accesslog.php');
+
+session_start();
+
+if (!isset($_SESSION['counter'])) {
+    $_SESSION['counter'] = 0; // Initialisiere den Zähler
+}
+    $_SESSION['counter']++;
 ?>
 
 <!DOCTYPE html>
@@ -144,7 +151,7 @@ include('m2_8a_accesslog.php')
 
             <table>
                 <tr><th>Name</th><th>Preis intern</th><th>Preis extern</th><th>Bild</th></tr>
-                <?php foreach ($gerichte as $gericht): ?>
+                <?php foreach ($gerichte as $gericht): $gerichte_counter++?>
                 <tr><td><?php echo $gericht['name']?></td><td><?php echo $gericht['preis_intern']?></td><td><?php echo $gericht['preis_extern']?></td><td><img class="tabellen_bilder" src="<?php echo $gericht['bild']?>" alt="Bild von Essen"></td></tr>
                 <?php endforeach;?>
             </table>
@@ -161,9 +168,9 @@ include('m2_8a_accesslog.php')
         <div class="mitte" id="zahlen">
             <h2>E-Mensa in Zahlen</h2>
             <ul class="horizontal">
-                <li>X Besuche</li>
+                <li><?php echo $_SESSION['counter']?> Besuche</li>
                 <li>Y Anmeldungen zum Newsletter</li>
-                <li>Z Speisen</li>
+                <li><?php echo $gerichte_counter ?> Speisen</li>
             </ul>
         </div>
         <div class="mitte" id="kontakt">
