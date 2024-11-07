@@ -11,13 +11,25 @@ $famousMeals = [
 ?>
 <!DOCTYPE html>
 <html lang="de">
+<head>
+    <title>Essen</title>
+    <style>
+        li{
+            margin: 5px;
+        }
+    </style>
+</head>
 <ol>
-    <?php foreach ($famousMeals as $meal)
+
+    <?php
+    $years = [];
+    foreach ($famousMeals as $meal)
     {
         echo '<li>' . $meal['name'].'<br>';
         foreach(array_reverse($meal["winner"]) as $year)
         {
-            if ($year != $meal['winner'] [0])
+            $years[] = $year;
+            if($year != $meal['winner'] [0])
             {
                 echo $year;
                 echo ", ";
@@ -26,6 +38,19 @@ $famousMeals = [
         }
         echo '</li>';
     }
+    echo "Jahr ohne Gewinner: ";
+    for($jahr = 2000; $jahr <= 2024; $jahr++)
+    {
+        $bool = false;
+        foreach($years as $year)
+        {
+            if($year == $jahr)
+            {$bool = true; break;}
+        }
+        if(!$bool)
+        {echo $jahr. "  ";}
+    }
+
     ?>
 </ol>
 </html>
