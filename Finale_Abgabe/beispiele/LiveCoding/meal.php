@@ -1,3 +1,10 @@
+<!--
+- Praktikum DBWT. Autoren:
+- Anton, Schindler, 3621756
+- Louis (Louisa), Rothmann, 3568758
+- Team 301
+-->
+
 <?php
 const GET_PARAM_MIN_STARS = 'search_min_stars';
 const GET_PARAM_STARS = 'top/flopp';
