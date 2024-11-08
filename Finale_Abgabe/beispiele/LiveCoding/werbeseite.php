@@ -50,7 +50,7 @@ if (!isset($_SESSION['counter'])) {
         main {
             margin-top: 15px;
         }
-        div > p {
+        #Textblock {
             border: 2px solid black;
             padding: 5px;
         }
@@ -121,6 +121,9 @@ if (!isset($_SESSION['counter'])) {
             position: relative;
             left: 15%;
         }
+        .red {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -142,7 +145,7 @@ if (!isset($_SESSION['counter'])) {
         </div>
         <div class="mitte">
             <h2>Bald gibt es Essen auch online ;)</h2>
-            <p>
+            <p id="Textblock">
                 Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus. Maecenas tempus, tellus eget condimentum rhoncus, sem quam semper libero, sit amet adipiscing sem neque sed ipsum. Nam quam nunc, blandit vel, luctus pulvinar, hendrerit id, lorem. Maecenas nec odio et ante tincidunt tempus. Donec vitae sapien ut libero venenatis faucibus. Nullam quis ante. Etiam sit amet orci eget eros faucibus tincidunt. Duis leo. Sed fringilla mauris sit amet nibh. Donec sodales sagittis magna. Sed consequat, leo eget bibendum sodales, augue velit cursus nunc,
             </p>
         </div>
@@ -151,7 +154,7 @@ if (!isset($_SESSION['counter'])) {
 
             <table>
                 <tr><th>Name</th><th>Preis intern</th><th>Preis extern</th><th>Bild</th></tr>
-                <?php foreach ($gerichte as $gericht): $gerichte_counter++?>
+                <?php $gerichte_counter = 0; foreach ($gerichte as $gericht): $gerichte_counter++?>
                 <tr><td><?php echo $gericht['name']?></td><td><?php echo $gericht['preis_intern']?></td><td><?php echo $gericht['preis_extern']?></td><td><img class="tabellen_bilder" src="<?php echo $gericht['bild']?>" alt="Bild von Essen"></td></tr>
                 <?php endforeach;?>
             </table>
@@ -175,31 +178,77 @@ if (!isset($_SESSION['counter'])) {
         </div>
         <div class="mitte" id="kontakt">
             <h2>Interesse geweckt? Wir informieren Sie!</h2>
-            <form method="post">
+            <form method="post" action="werbeseite.php#kontakt">
                 <ul class="horizontal">
                     <li>
                         <label for="vorname">Ihr Name:</label>
                         <br>
-                        <input type="text" id="vorname" name="vorname" placeholder="Vorname" required>
+                        <input type="text" id="vorname" name="vorname" placeholder= "<?php
+                        if (isset($_POST['vorname']))
+                        {
+                            echo trim($_POST['vorname'], " ");
+                        }
+                        else {echo "Vorname";}
+                        ?>" required>
                     </li>
                     <li>
                         <label for="mail">Ihre E-Mail:</label>
                         <br>
-                        <input type="text" id="mail" name="mail-adresse" placeholder="E-Mail" required>
+                        <input type="text" id="mail" name="mail-adresse" placeholder="<?php
+                        if (isset($_POST['mail-adresse']))
+                        {
+                            echo trim($_POST['mail-adresse'], " ");
+                        }
+                        else {echo "E-Mail";}
+                        ?>" required>
                     </li>
                     <li>
                         <label for="sprache">Newsletter bitte in:</label>
                         <br>
-                        <select id="sprache">
+                        <select id="sprache" name="sprache">
                             <option value="GER">Deutsch</option>
                             <option value="EN">English</option>
-                            <option value="SP">Spanish</option>
+                            <option value="ES">Spanish</option>
                         </select>
                     </li>
                 </ul>
                 <input type="checkbox" required> Den Datenschutzbestimmungen stimme ich zu
                 <input type="submit" id="submit" value="Zum Newsletter anmelden">
             </form>
+            <?php
+            if (isset($_POST['vorname'])) {
+                $name = trim($_POST['vorname'], " ");
+                $mail = trim($_POST['mail-adresse'], " ");
+                $at = '@';
+                $point = '.';
+                $position = strpos($mail, $at);
+                $offset = substr($mail,$position);
+                $position_point = strpos($offset, $point);
+                $sprache = $_POST['sprache'];
+                if ($name == "" || str_contains($name, ' '))
+                {
+                    echo "<p class='red'>Bitte geben Sie ihren richtigen Namen ein</p>";
+                }
+                elseif ($mail == "" || $position == '0' || $position == strlen($mail) || $position_point == '1' || $position_point == strlen($offset) - 1 || str_contains($mail, ' '))
+                {
+                    echo "<p class='red'>Bitte geben Sie eine gültige Mail-Adresse ein</p>";
+                }
+                else {
+                    $file = fopen("./userdata.txt", "a");
+
+                    if (!$file) {
+                        die('Öffnen fehlgeschlagen');
+                    }
+
+                    $line = $name . " " . $mail. " " . $_POST['sprache'] . " \n";
+
+                    fwrite($file, $line);
+
+                    fclose($file);
+                    echo "<br> Ihre Daten wurden gespeichert :) <br>";
+                }
+            }
+            ?>
         </div>
         <div class="mitte" id="infos">
             <h2>Das ist uns wichtig</h2>

@@ -1,3 +1,9 @@
+<!--
+- Praktikum DBWT. Autoren:
+- Anton, Schindler, 3621756
+- Louis (Louisa), Rothmann, 3568758
+- Team 301
+-->
 <?php
 include "m2_6a_standardparameter.php";
 const GET_PARAM_A = 'a';
