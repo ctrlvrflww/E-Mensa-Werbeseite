@@ -9,7 +9,6 @@ include('gerichte.php');
 include('m2_8a_accesslog.php');
 
 session_start();
-
 if (!isset($_SESSION['counter'])) {
     $_SESSION['counter'] = 0; // Initialisiere den Zähler
 }
@@ -172,7 +171,21 @@ if (!isset($_SESSION['counter'])) {
             <h2>E-Mensa in Zahlen</h2>
             <ul class="horizontal">
                 <li><?php echo $_SESSION['counter']?> Besuche</li>
-                <li>Y Anmeldungen zum Newsletter</li>
+                <li><?php
+                    $file = fopen('./userdata.txt', 'r');
+                    if (!$file) {
+                        die('Öffnen von userdata.txt fehlgeschlagen');
+                    }
+
+                    $counter = 0;
+
+                    while (!feof($file)) {
+                        fgets($file, 1024);
+                        $counter++;
+                    }
+                    echo $counter;
+                    fclose($file);
+                    ?> Anmeldungen zum Newsletter</li>
                 <li><?php echo $gerichte_counter ?> Speisen</li>
             </ul>
         </div>
