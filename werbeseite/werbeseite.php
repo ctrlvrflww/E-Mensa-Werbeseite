@@ -154,7 +154,7 @@ if (!isset($_SESSION['counter'])) {
             <table>
                 <tr><th>Name</th><th>Preis intern</th><th>Preis extern</th><th>Bild</th></tr>
                 <?php $gerichte_counter = 0; foreach ($gerichte as $gericht): $gerichte_counter++?>
-                <tr><td><?php echo $gericht['name']?></td><td><?php echo $gericht['preis_intern']?></td><td><?php echo $gericht['preis_extern']?></td><td><img class="tabellen_bilder" src="<?php echo $gericht['bild']?>" alt="Bild von Essen"></td></tr>
+                <tr><td><?php echo $gericht['name']?></td><td><?php echo $gericht['preisintern'] . "€"?></td><td><?php echo $gericht['preisextern'] . "€"?></td><td><img class="tabellen_bilder" src="<?php echo $gericht['bild']?>" alt="Bild von Essen"></td></tr>
                 <?php endforeach;?>
             </table>
 
