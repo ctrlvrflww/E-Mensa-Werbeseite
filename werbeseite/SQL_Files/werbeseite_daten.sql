@@ -1,7 +1,7 @@
 
-USE werbeseiteemensa;
+USE emensawerbeseite;
 
-INSERT INTO `allergen` (`code`, `name`, `typ`) VALUES
+INSERT INTO allergen (code, name, typ) VALUES
        ('a', 'Getreideprodukte', 'Getreide (Gluten)'),
        ('a1', 'Weizen', 'Allergen'),
        ('a2', 'Roggen', 'Allergen'),
@@ -24,7 +24,7 @@ INSERT INTO `allergen` (`code`, `name`, `typ`) VALUES
        ('h3', 'Walnüsse', 'Allergen'),
        ('i', 'Erdnüsse', 'Allergen');
 
-INSERT INTO `gericht` (`id`, `name`, `beschreibung`, `erfasst_am`, `vegan`, `vegetarisch`, `preisintern`, `preisextern`) VALUES
+INSERT INTO gericht (`id`, `name`, `beschreibung`, `erfasst_am`, `vegan`, `vegetarisch`, `preisintern`, `preisextern`) VALUES
          (1, 'Bratkartoffeln mit Speck und Zwiebeln', 'Kartoffeln mit Zwiebeln und gut Speck', '2020-08-25', 0, 0, 2.3, 4),
          (3, 'Bratkartoffeln mit Zwiebeln', 'Kartoffeln mit Zwiebeln und ohne Speck', '2020-08-25', 1, 1, 2.3, 4),
          (4, 'Grilltofu', 'Fein gewürzt und mariniert', '2020-08-25', 1, 1, 2.5, 4.5),
@@ -44,6 +44,7 @@ INSERT INTO `gericht` (`id`, `name`, `beschreibung`, `erfasst_am`, `vegan`, `veg
          (18, 'Tomatenbrötchen', 'mit Schnittlauch und Zwiebeln', '2020-08-25', 1, 1, 1, 1.5),
          (19, 'Mousse au Chocolat', 'sahnige schweizer Schokolade rundet jedes Essen ab', '2020-08-26', 0, 1, 1.25, 1.75),
          (20, 'Suppenkreation á la Chef', 'was verschafft werden muss, gut und günstig', '2020-08-26', 0, 0, 0.5, 0.9);
+
 
 INSERT INTO `gericht_hat_allergen` (`code`, `gericht_id`) VALUES
         ('h', 1),
