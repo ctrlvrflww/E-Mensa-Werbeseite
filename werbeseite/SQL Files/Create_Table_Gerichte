@@ -1,0 +1,12 @@
+CREATE TABLE gerichte (
+                          id bigint(20) NOT NULL,
+                          name varchar(80) NOT NULL,
+                          beschreibung varchar(800) NOT NULL,
+                          erfasst_am date NOT NULL,
+                          vegetarisch tinyint(1) NOT NULL,
+                          vegan tinyint(1) NOT NULL,
+                          preisintern double NOT NULL,
+                          preisextern double NOT NULL,
+                          PRIMARY KEY (id),
+                          UNIQUE KEY name (name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci

@@ -1,0 +1,6 @@
+CREATE TABLE allergen (
+                          code char(4) NOT NULL,
+                          name varchar(300) NOT NULL,
+                          typ varchar(20) NOT NULL,
+                          PRIMARY KEY (code)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

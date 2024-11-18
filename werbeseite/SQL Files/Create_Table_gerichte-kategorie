@@ -1,0 +1,6 @@
+CREATE TABLE gerichte_hat_kategorie (
+                                        gericht_id bigint(20) NOT NULL,
+                                        kategorie_id bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+
