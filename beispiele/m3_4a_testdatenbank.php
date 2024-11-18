@@ -11,7 +11,7 @@ if (!$link) {
     exit();
 }
 
-$sql = "SELECT id, name, beschreibung FROM gericht";
+$sql = "SELECT * FROM gericht;";
 
 $result = mysqli_query($link, $sql);
 if (!$result) {
@@ -19,10 +19,12 @@ if (!$result) {
     exit();
 }
 
-echo "<table>";
-echo "<th>"."</th>";
+$gerichtart = "";
+echo "<table border= '1'>";
+echo "<tr><th>ID</th><th>Name</th><th>Beschreibung</th><th>Erfasst am</th><th>Gerichtart</th><th>Preis Intern</th><th>Preis Extern</th></tr>";
 while ($row = mysqli_fetch_assoc($result)) {
-    echo '<tr>'.$row['id']. ':'. $row['name']. '</tr>';
+    if($row['vegan']) {$gerichtart = "vegan";} else if($row['vegetarisch']) {$gerichtart = "vegetarisch";} else {$gerichtart = "Klassiker";}
+    echo '<tr> <td>'.$row['id'].'</td><td>'.$row['name'].'</td><td>'.$row['beschreibung'].'</td><td>'.$row['erfasst_am'].'</td><td>'.$gerichtart.'</td><td>'.$row['preisintern'].'</td><td>'.$row['preisextern'].'</td></tr>';
 }
 echo "</table>";
 
