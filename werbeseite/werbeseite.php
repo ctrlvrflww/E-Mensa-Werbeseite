@@ -194,8 +194,15 @@ mysqli_close($link);
                 <?php endforeach;?>
             </table>
 
-            <h3>Liste mit Allergenen</h3>
+            <!-- TODO: Louis: Fixen das nicht für jedes Gericht eine neue Zeile erstellt wird, sondern die Allergene in einer Zelle aufgelistet werden-->
 
+            <h3>Liste mit Allergenen</h3>
+            <table>
+                <tr><th>Name</th><th>Code</th></tr>
+                <?php foreach ($allergene as $allergen): ?>
+                <tr><td><?php echo $allergen['name']?></td><td><?php echo $allergen['code'] ?></td></tr>
+                <?php endforeach;?>
+            </table>
         </div>
         <div class="mitte" id="zahlen">
             <h2>E-Mensa in Zahlen</h2>

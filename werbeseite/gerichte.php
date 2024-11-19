@@ -65,8 +65,23 @@ if ($result->num_rows > 0) {
     echo "Keine Ergebnisse gefunden";
 }
 
+// SQL Abfrage für Allergen-Liste
+$sql_allergen = "SELECT name, code FROM allergen";
+$result_all = $verbindung->query($sql_allergen);
 
+$allergene = array();
 
+if ($result_all->num_rows > 0) {
+    while($row_all = $result_all->fetch_assoc()) { // fetch_assoc() wird verwendet, um Daten aus einem Ergebnis-Set einer SQL-Anfrage zu holen
+
+        $allergene[] = [
+            "name" => $row_all["name"],
+            "code" => $row_all["code"]
+        ];
+    }
+} else {
+    echo "Keine Ergebnisse gefunden";
+}
 
 $verbindung->close();
 
