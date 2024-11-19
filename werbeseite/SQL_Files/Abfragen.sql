@@ -66,6 +66,7 @@ SELECT k.name, COUNT(gk.gericht_id) AS Anzahl FROM gericht g
             GROUP BY k.name
             HAVING Anzahl>= 2
             ORDER BY Anzahl ASC;
+
 -- 6) Alle Gerichte, die vier oder mehr Allergene aufweisen
 SELECT g.name, COUNT(ga.code) AS Anzahl  FROM gericht g
             RIGHT JOIN gericht_hat_allergen ga ON g.id = ga.gericht_id
