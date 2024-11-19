@@ -89,7 +89,19 @@ INSERT INTO `kategorie` (`id`, `eltern_id`, `name`, `bildname`) VALUES
         (7, 1, 'Erstiewoche', 'kat_erties.jpg');
 
 INSERT INTO `gericht_hat_kategorie` (`kategorie_id`, `gericht_id`) VALUES
-       (3, 1),	(3, 3),	(3, 4),	(3, 5),	(3, 6),	(3, 7),	(3, 9),	(4, 16), (4, 17), (4, 18), (5, 16), (5, 17), (5, 18);
+       (3, 1),
+       (3, 3),
+       (3, 4),
+       (3, 5),
+       (3, 6),
+       (3, 7),
+       (3, 9),
+       (4, 16),
+       (4, 17),
+       (4, 18),
+       (5, 16),
+       (5, 17),
+       (5, 18);
 
 
 
