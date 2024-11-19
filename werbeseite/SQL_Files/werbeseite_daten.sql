@@ -105,3 +105,4 @@ INSERT INTO `gericht_hat_kategorie` (`kategorie_id`, `gericht_id`) VALUES
 
 
 
+

@@ -166,21 +166,33 @@ if (!isset($_SESSION['counter'])) {
             <ul class="horizontal">
                 <li><?php echo $_SESSION['counter']?> Besuche</li>
                 <li><?php
-                    $file = fopen('./userdata.txt', 'r');
-                    if (!$file) {
-                        die('Öffnen von userdata.txt fehlgeschlagen');
-                    }
+                    $link = mysqli_connect("localhost",   // Host der Datenbank
+                        "root",                         // Benutzername zur Anmeldung
+                        "Tonihoni04!",                  // Passwort
+                        "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
+                    // optional port der Datenbank
+                    );
 
-                    $counter = 0;
-
-                    while (!feof($file)) {
-                        fgets($file, 1024);
-                        $counter++;
+                    if (!$link) {
+                        echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
+                        exit();
                     }
-                    echo $counter;
-                    fclose($file);
-                    ?> Anmeldungen zum Newsletter</li>
-                <li><?php echo $gerichte_counter ?> Speisen</li>
+                    $sql = "SELECT COUNT(*) AS count FROM newsletter_anmeldungen;";
+                    $result = mysqli_query($link, $sql);
+                    if (!$result) {
+                        echo "Fehler während der Abfrage:  ", mysqli_error($link);
+                        exit();
+                    }
+                    $row = mysqli_fetch_assoc($result);
+                    $meals = "SELECT COUNT(*) AS zaehler FROM gericht;";
+                    $ergebnis = mysqli_query($link, $meals);
+                    if (!$ergebnis) {
+                        echo "Fehler während der Abfrage:  ", mysqli_error($link);
+                        exit();
+                    }
+                    $essen = mysqli_fetch_assoc($ergebnis);
+                    echo $row['count']. " Anmeldungen zum Newsletter</li><li>". $essen['zaehler'];
+                    ?> Speisen</li>
             </ul>
         </div>
         <div class="mitte" id="kontakt">
@@ -232,7 +244,7 @@ if (!isset($_SESSION['counter'])) {
                 $offset = substr($mail,$position);
                 $position_point = strpos($offset, $point);
                 $sprache = $_POST['sprache'];
-                if ($name == "" || str_contains($name, ' '))
+                if ($name == "" || $name == ' ')
                 {
                     echo "<p class='red'>Bitte geben Sie ihren richtigen Namen ein</p>";
                 }
@@ -241,18 +253,35 @@ if (!isset($_SESSION['counter'])) {
                     echo "<p class='red'>Bitte geben Sie eine gültige Mail-Adresse ein</p>";
                 }
                 else {
-                    $file = fopen("./userdata.txt", "a");
+                    $link = mysqli_connect("localhost",   // Host der Datenbank
+                        "root",                         // Benutzername zur Anmeldung
+                        "Tonihoni04!",                  // Passwort
+                        "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
+                    // optional port der Datenbank
+                    );
 
-                    if (!$file) {
-                        die('Öffnen fehlgeschlagen');
+                    if (!$link) {
+                        echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
+                        exit();
                     }
-
-                    $line = $name . " " . $mail. " " . $_POST['sprache'] . " \n";
-
-                    fwrite($file, $line);
-
-                    fclose($file);
-                    echo "<br> Ihre Daten wurden gespeichert :) <br>";
+                    $dopplung = "SELECT COUNT(*) AS count FROM newsletter_anmeldungen WHERE mail = '$mail';";
+                    $result = mysqli_query($link, $dopplung);
+                    if (!$result) {
+                        echo "Fehler während der Abfrage:  ", mysqli_error($link);
+                        exit();
+                    }
+                    $row = mysqli_fetch_assoc($result);
+                    if($row['count'] <= 0)
+                    {
+                        $sql = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE ('".$name."','". $mail ."','". $sprache."'); ";
+                        $result = mysqli_query($link, $sql);
+                        if (!$result) {
+                            echo "Fehler während der Abfrage:  ", mysqli_error($link);
+                            exit();
+                        }
+                        echo "<br> Ihre Daten wurden gespeichert :) <br>";
+                    }
+                    else {echo "<br> <p class='red'> Die von ihnen eingegebener Mail-Adresse ist schon angemeldet. </p>";}
                 }
             }
             ?>

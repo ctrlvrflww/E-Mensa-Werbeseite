@@ -37,3 +37,9 @@ CREATE TABLE gericht_hat_kategorie (
         FOREIGN KEY (kategorie_id) REFERENCES kategorie(id),
         FOREIGN KEY (gericht_id) REFERENCES gericht(id)
 );
+
+CREATE TABLE newsletter_anmeldungen(
+        name varchar(30)  not null ,
+        mail varchar(255) not null UNIQUE PRIMARY KEY ,
+        sprache char(10) not null
+);
