@@ -43,3 +43,9 @@ CREATE TABLE newsletter_anmeldungen(
         mail varchar(255) not null UNIQUE PRIMARY KEY ,
         sprache char(10) not null
 );
+
+CREATE TABLE besuche (
+    ip varchar(255) not null,
+    request_time varchar(255) not null,
+    http_user_agent varchar(255) not null  unique primary key
+);

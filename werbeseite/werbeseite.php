@@ -1,4 +1,4 @@
-global$orderby; <!--
+<!--
 - Praktikum DBWT. Autoren:
 - Anton, Schindler, 3621756
 - Louis (Louisa), Rothmann, 3568758
@@ -6,13 +6,49 @@ global$orderby; <!--
 -->
 <?php
 include('gerichte.php');
-include('m2_8a_accesslog.php');
 
 session_start();
-if (!isset($_SESSION['counter'])) {
-    $_SESSION['counter'] = 0; // Initialisiere den Zähler
+$ip = $_SERVER['SERVER_NAME'];
+$request_time = $_SERVER['REQUEST_TIME'];
+$http_user_agent = $_SERVER['HTTP_USER_AGENT'];
+
+$link=mysqli_connect("localhost",   // Host der Datenbank
+    "root",                         // Benutzername zur Anmeldung
+    "Tonihoni04!",                  // Passwort
+    "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
+// optional port der Datenbank
+);
+
+if (!$link) {
+    echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
+    exit();
 }
-    $_SESSION['counter']++;
+$dopplung = "SELECT COUNT(*) AS count FROM besuche WHERE http_user_agent = '$http_user_agent';";
+$result = mysqli_query($link, $dopplung);
+if (!$result) {
+    echo "Fehler während der Abfrage:  ", mysqli_error($link);
+    exit();
+}
+$row = mysqli_fetch_assoc($result);
+$cnt_calc = "SELECT COUNT(*) AS count_real FROM besuche;";
+$resultat = mysqli_query($link, $cnt_calc);
+if (!$resultat) {
+    echo "Fehler während der Abfrage:  ", mysqli_error($link);
+    exit();
+}
+$cnt = mysqli_fetch_assoc($resultat);
+$besuche_counter = $cnt['count_real'];
+if($row['count'] <= 0) {
+    $sql = "INSERT INTO besuche (ip, request_time, http_user_agent) VALUE ('" . $ip . "','" . $request_time . "','" . $http_user_agent . "');";
+    $result_1 = mysqli_query($link, $sql);
+    if (!$result_1) {
+        echo "Fehler während der Abfrage:  ", mysqli_error($link);
+        exit();
+    }
+    mysqli_free_result($result_1);
+}
+mysqli_free_result($result);
+mysqli_close($link);
 ?>
 
 <!DOCTYPE html>
@@ -164,7 +200,7 @@ if (!isset($_SESSION['counter'])) {
         <div class="mitte" id="zahlen">
             <h2>E-Mensa in Zahlen</h2>
             <ul class="horizontal">
-                <li><?php echo $_SESSION['counter']?> Besuche</li>
+                <li><?php echo $besuche_counter?> Besuche</li>
                 <li><?php
                     $link = mysqli_connect("localhost",   // Host der Datenbank
                         "root",                         // Benutzername zur Anmeldung
@@ -192,6 +228,9 @@ if (!isset($_SESSION['counter'])) {
                     }
                     $essen = mysqli_fetch_assoc($ergebnis);
                     echo $row['count']. " Anmeldungen zum Newsletter</li><li>". $essen['zaehler'];
+                    mysqli_free_result($result);
+                    mysqli_free_result($ergebnis);
+                    mysqli_close($link);
                     ?> Speisen</li>
             </ul>
         </div>
@@ -273,15 +312,17 @@ if (!isset($_SESSION['counter'])) {
                     $row = mysqli_fetch_assoc($result);
                     if($row['count'] <= 0)
                     {
-                        $sql = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE ('".$name."','". $mail ."','". $sprache."'); ";
+                        $sql = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE ('".$name."','". $mail ."','". $sprache."');";
                         $result = mysqli_query($link, $sql);
                         if (!$result) {
                             echo "Fehler während der Abfrage:  ", mysqli_error($link);
                             exit();
                         }
                         echo "<br> Ihre Daten wurden gespeichert :) <br>";
+                        mysqli_free_result($result);
                     }
                     else {echo "<br> <p class='red'> Die von ihnen eingegebener Mail-Adresse ist schon angemeldet. </p>";}
+                    mysqli_close($link);
                 }
             }
             ?>
