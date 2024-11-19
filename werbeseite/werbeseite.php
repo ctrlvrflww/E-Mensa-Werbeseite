@@ -1,4 +1,4 @@
-<!--
+global$orderby; <!--
 - Praktikum DBWT. Autoren:
 - Anton, Schindler, 3621756
 - Louis (Louisa), Rothmann, 3568758
@@ -150,22 +150,16 @@ if (!isset($_SESSION['counter'])) {
         </div>
         <div class="mitte" id="speisen">
             <h2>Köstlichkeiten, die Sie erwarten</h2>
-
+            <!--<p>aktuelle Sortierung:</p> <?php echo "order:". $orderby . " Reihenfolge: " . $direction?> -->
             <table>
-                <tr><th>Name</th><th>Preis intern</th><th>Preis extern</th><th>Bild</th></tr>
+                <tr><th>Name</th><th>Preis intern</th><th>Preis extern</th><th>Allergene</th></tr>
                 <?php $gerichte_counter = 0; foreach ($gerichte as $gericht): $gerichte_counter++?>
-                <tr><td><?php echo $gericht['name']?></td><td><?php echo $gericht['preisintern'] . "€"?></td><td><?php echo $gericht['preisextern'] . "€"?></td><td><img class="tabellen_bilder" src="<?php echo $gericht['bild']?>" alt="Bild von Essen"></td></tr>
+                <tr><td><?php echo $gericht['name']?></td><td><?php echo $gericht['preisintern'] . "€"?></td><td><?php echo $gericht['preisextern'] . "€"?></td><td> <?php echo $gericht['code'] ?></td></tr>
                 <?php endforeach;?>
             </table>
 
-            <!--
-            <table>
-                <tr><th></th><th>Preis intern</th><th>Preis extern</th></tr>
-                <tr><td>Rindfleisch mit Bambus, Kaiserschoten und rotem Paprika, dazu Mie Nudeln</td><td>3,50</td><td>6,20</td></tr>
-                <tr><td>Spinatrisotto mit kleinen Samosateigecken und gemischter Salat</td><td>2,90</td><td>5,30</td></tr>
-                <tr><td>...</td><td>...</td><td>...</td></tr>
-            </table>
-            -->
+            <h3>Liste mit Allergenen</h3>
+
         </div>
         <div class="mitte" id="zahlen">
             <h2>E-Mensa in Zahlen</h2>
