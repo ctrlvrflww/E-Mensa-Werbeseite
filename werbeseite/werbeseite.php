@@ -14,7 +14,7 @@ $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 $link=mysqli_connect("localhost",   // Host der Datenbank
     "root",                         // Benutzername zur Anmeldung
-    "Tonihoni04!",                  // Passwort
+    "SWE24",                  // Passwort
     "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
 );
 
@@ -182,12 +182,11 @@ mysqli_close($link);
             <!--<p>aktuelle Sortierung:</p> <?php echo "order:". $orderby . " Reihenfolge: " . $direction?> -->
             <table>
                 <tr><th>Name</th><th>Preis intern</th><th>Preis extern</th><th>Allergene</th></tr>
-                <?php $gerichte_counter = 0; foreach ($gerichte as $gericht): $gerichte_counter++?>
+                <?php foreach ($gerichte as $gericht): ?>
                 <tr><td><?php echo $gericht['name']?></td><td><?php echo $gericht['preisintern'] . "€"?></td><td><?php echo $gericht['preisextern'] . "€"?></td><td> <?php echo $gericht['code'] ?></td></tr>
                 <?php endforeach;?>
             </table>
 
-            <!-- TODO: Louis: Fixen das nicht für jedes Gericht eine neue Zeile erstellt wird, sondern die Allergene in einer Zelle aufgelistet werden-->
 
             <h3>Liste mit Allergenen</h3>
             <table>
@@ -204,7 +203,7 @@ mysqli_close($link);
                 <li><?php
                     $link = mysqli_connect("localhost",   // Host der Datenbank
                         "root",                         // Benutzername zur Anmeldung
-                        "Tonihoni04!",                  // Passwort
+                        "SWE24",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
                     );
 

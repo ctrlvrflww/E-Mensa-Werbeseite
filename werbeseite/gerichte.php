@@ -9,7 +9,7 @@
 // Verbindungsdetails
 $servername = "localhost";
 $username = "root";
-$password = "Tonihoni04!";
+$password = "SWE24";
 $dbname = "emensawerbeseite";
 
 // Verbindung herstellen
@@ -40,7 +40,7 @@ if (!in_array($direction, $allowed_orderdirec)) { // ist der Wert aus $direction
 // SQL Abfrage für Name, Preis-Intern und Preis-Extern und Order
 $sql = "SELECT DISTINCT ger.name,ger.preisintern,ger.preisextern,ger_all.code
         FROM gericht AS ger
-        JOIN gericht_hat_allergen AS ger_all
+        LEFT JOIN gericht_hat_allergen AS ger_all
         ON ger.id = ger_all.gericht_id
         ORDER BY " . $orderby . " " . $direction;
 // Speichere die Erebnisse aus der SQL Query in $result
