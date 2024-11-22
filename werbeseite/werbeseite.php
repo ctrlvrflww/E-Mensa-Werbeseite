@@ -16,20 +16,20 @@ $link=mysqli_connect("localhost",   // Host der Datenbank
     "root",                         // Benutzername zur Anmeldung
     "Tonihoni04!",                  // Passwort
     "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
-// optional port der Datenbank
 );
 
 if (!$link) {
     echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
     exit();
 }
-$dopplung = "SELECT COUNT(*) AS count FROM besuche WHERE http_user_agent = '$http_user_agent';";
-$result = mysqli_query($link, $dopplung);
+$vorhanden = "SELECT COUNT(*) AS count FROM besuche WHERE http_user_agent = '$http_user_agent';";
+//prüft, ob der user schon auf der Seite war
+$result = mysqli_query($link, $vorhanden);
 if (!$result) {
     echo "Fehler während der Abfrage:  ", mysqli_error($link);
     exit();
 }
-$row = mysqli_fetch_assoc($result);
+$bool = mysqli_fetch_assoc($result);
 $cnt_calc = "SELECT COUNT(*) AS count_real FROM besuche;";
 $resultat = mysqli_query($link, $cnt_calc);
 if (!$resultat) {
@@ -38,14 +38,9 @@ if (!$resultat) {
 }
 $cnt = mysqli_fetch_assoc($resultat);
 $besuche_counter = $cnt['count_real'];
-if($row['count'] <= 0) {
-    $sql = "INSERT INTO besuche (ip, request_time, http_user_agent) VALUE ('" . $ip . "','" . $request_time . "','" . $http_user_agent . "');";
-    $result_1 = mysqli_query($link, $sql);
-    if (!$result_1) {
-        echo "Fehler während der Abfrage:  ", mysqli_error($link);
-        exit();
-    }
-    mysqli_free_result($result_1);
+if($bool['count'] = 0) {
+    $einfügen = "INSERT INTO besuche (ip, request_time, http_user_agent) VALUE ('" . $ip . "','" . $request_time . "','" . $http_user_agent . "');";
+    //fügt den User in die Datenbank ein
 }
 mysqli_free_result($result);
 mysqli_close($link);
@@ -101,12 +96,10 @@ mysqli_close($link);
         td{
             border:1px solid lightgray;
         }
-
         .tabellen_bilder{
             width: 200px;
             height:auto;
         }
-
         tr:nth-child(1) {
             border: 3px solid black;
         }
@@ -213,28 +206,29 @@ mysqli_close($link);
                         "root",                         // Benutzername zur Anmeldung
                         "Tonihoni04!",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
-                    // optional port der Datenbank
                     );
 
                     if (!$link) {
                         echo "Verbindung fehlgeschlagen: ", mysqli_connect_error();
                         exit();
                     }
-                    $sql = "SELECT COUNT(*) AS count FROM newsletter_anmeldungen;";
-                    $result = mysqli_query($link, $sql);
+                    $anmeldungen = "SELECT COUNT(*) AS count FROM newsletter_anmeldungen;";
+                    // zählt die Anzahl der Anmeldungen in der Datenbank
+                    $result = mysqli_query($link, $anmeldungen);
                     if (!$result) {
                         echo "Fehler während der Abfrage:  ", mysqli_error($link);
                         exit();
                     }
-                    $row = mysqli_fetch_assoc($result);
+                    $mails = mysqli_fetch_assoc($result);
                     $meals = "SELECT COUNT(*) AS zaehler FROM gericht;";
+                    //zählt die Anzahl der Gerichte in der Datenbank
                     $ergebnis = mysqli_query($link, $meals);
                     if (!$ergebnis) {
                         echo "Fehler während der Abfrage:  ", mysqli_error($link);
                         exit();
                     }
                     $essen = mysqli_fetch_assoc($ergebnis);
-                    echo $row['count']. " Anmeldungen zum Newsletter</li><li>". $essen['zaehler'];
+                    echo $mails['count']. " Anmeldungen zum Newsletter</li><li>". $essen['zaehler'];
                     mysqli_free_result($result);
                     mysqli_free_result($ergebnis);
                     mysqli_close($link);
@@ -252,6 +246,7 @@ mysqli_close($link);
                         if (isset($_POST['vorname']))
                         {
                             echo trim($_POST['vorname'], " ");
+                            //leerzeichen vor und hinter dem Namen entfernen
                         }
                         else {echo "Vorname";}
                         ?>" required>
@@ -263,6 +258,7 @@ mysqli_close($link);
                         if (isset($_POST['mail-adresse']))
                         {
                             echo trim($_POST['mail-adresse'], " ");
+                            //leerzeichen vor und hinter der Email entfernen
                         }
                         else {echo "E-Mail";}
                         ?>" required>
@@ -286,15 +282,16 @@ mysqli_close($link);
                 $mail = trim($_POST['mail-adresse'], " ");
                 $at = '@';
                 $point = '.';
-                $position = strpos($mail, $at);
-                $offset = substr($mail,$position);
-                $position_point = strpos($offset, $point);
+                $position = strpos($mail, $at); //position des @
+                $offset = substr($mail,$position); //position nach dem @
+                $position_point = strpos($offset, $point); //position des Punktes in dem Teil nach dem @
                 $sprache = $_POST['sprache'];
                 if ($name == "" || $name == ' ')
                 {
                     echo "<p class='red'>Bitte geben Sie ihren richtigen Namen ein</p>";
                 }
                 elseif ($mail == "" || $position == '0' || $position == strlen($mail) || $position_point == '1' || $position_point == strlen($offset) - 1 || str_contains($mail, ' '))
+                    // prüft, ob vor und nach dem @ text steht und ob danach ein punkt kommt, nachdem wieder Text kommt
                 {
                     echo "<p class='red'>Bitte geben Sie eine gültige Mail-Adresse ein</p>";
                 }
@@ -303,7 +300,6 @@ mysqli_close($link);
                         "root",                         // Benutzername zur Anmeldung
                         "Tonihoni04!",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
-                    // optional port der Datenbank
                     );
 
                     if (!$link) {
@@ -311,22 +307,18 @@ mysqli_close($link);
                         exit();
                     }
                     $dopplung = "SELECT COUNT(*) AS count FROM newsletter_anmeldungen WHERE mail = '$mail';";
+                    //prüft, ob die Mail bereits angemeldet ist
                     $result = mysqli_query($link, $dopplung);
                     if (!$result) {
                         echo "Fehler während der Abfrage:  ", mysqli_error($link);
                         exit();
                     }
-                    $row = mysqli_fetch_assoc($result);
-                    if($row['count'] <= 0)
+                    $bool = mysqli_fetch_assoc($result);
+                    if($bool['count'] = 0)
                     {
-                        $sql = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE ('".$name."','". $mail ."','". $sprache."');";
-                        $result = mysqli_query($link, $sql);
-                        if (!$result) {
-                            echo "Fehler während der Abfrage:  ", mysqli_error($link);
-                            exit();
-                        }
+                        $anmeldung = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE ('".$name."','". $mail ."','". $sprache."');";
+                        //fügt den Namen, Mail und Sprache in die Datenbank ein
                         echo "<br> Ihre Daten wurden gespeichert :) <br>";
-                        mysqli_free_result($result);
                     }
                     else {echo "<br> <p class='red'> Die von ihnen eingegebener Mail-Adresse ist schon angemeldet. </p>";}
                     mysqli_close($link);
