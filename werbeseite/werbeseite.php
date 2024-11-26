@@ -14,7 +14,7 @@ $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 $link=mysqli_connect("localhost",   // Host der Datenbank
     "root",                         // Benutzername zur Anmeldung
-    "SWE24",                  // Passwort
+    "Tonihoni04!",                  // Passwort
     "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
 );
 
@@ -38,9 +38,14 @@ if (!$resultat) {
 }
 $cnt = mysqli_fetch_assoc($resultat);
 $besuche_counter = $cnt['count_real'];
-if($bool['count'] = 0) {
+if($bool['count'] <= 0) {
     $einfügen = "INSERT INTO besuche (ip, request_time, http_user_agent) VALUE ('" . $ip . "','" . $request_time . "','" . $http_user_agent . "');";
     //fügt den User in die Datenbank ein
+    $resultat1 = mysqli_query($link, $einfügen);
+    if (!$resultat1) {
+        echo "Fehler während der Abfrage:  ", mysqli_error($link);
+        exit();
+    }
 }
 mysqli_free_result($result);
 mysqli_close($link);
@@ -203,7 +208,7 @@ mysqli_close($link);
                 <li><?php
                     $link = mysqli_connect("localhost",   // Host der Datenbank
                         "root",                         // Benutzername zur Anmeldung
-                        "SWE24",                  // Passwort
+                        "Tonihoni04!",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
                     );
 
@@ -313,13 +318,19 @@ mysqli_close($link);
                         exit();
                     }
                     $bool = mysqli_fetch_assoc($result);
-                    if($bool['count'] = 0)
+                    if($bool['count'] <= 0)
                     {
                         $anmeldung = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE ('".$name."','". $mail ."','". $sprache."');";
                         //fügt den Namen, Mail und Sprache in die Datenbank ein
                         echo "<br> Ihre Daten wurden gespeichert :) <br>";
+                        $result1 = mysqli_query($link, $anmeldung);
+                        if (!$result1) {
+                            echo "Fehler während der Abfrage:  ", mysqli_error($link);
+                            exit();
+                        }
                     }
                     else {echo "<br> <p class='red'> Die von ihnen eingegebener Mail-Adresse ist schon angemeldet. </p>";}
+                    mysqli_free_result($result);
                     mysqli_close($link);
                 }
             }
