@@ -49,3 +49,22 @@ CREATE TABLE besuche (
     request_time varchar(255) not null,
     http_user_agent varchar(255) not null  unique primary key
 );
+
+CREATE TABLE Wunschgerichte (
+    nummer int8 not null unique primary key, -- generierte Nummer
+    name varchar(100) not null,              -- Gerichtname
+    beschreibung varchar(2048) not null,     -- Beschreibung des Gerichtes und der Zubereitung
+    datum varchar(32) not null               -- Datum der Erstellung des Eintrages
+);
+
+CREATE TABLE Erstellerin (
+    name varchar(32) not null,  -- Name des Ersteller, bei keiner Angabe "anonym"
+    email varchar(128) not null unique primary key -- Email von den Ersteller:in
+);
+
+CREATE TABLE Erstellerin_hat_Wunschgerichte (
+    wunschgerichtnummer int8 not null,
+    erstellerin_email varchar(128) not null,
+    FOREIGN KEY (wunschgerichtnummer) REFERENCES Erstellerin(email),
+    FOREIGN KEY (erstellerin_email) REFERENCES Wunschgerichte(nummer)
+);
