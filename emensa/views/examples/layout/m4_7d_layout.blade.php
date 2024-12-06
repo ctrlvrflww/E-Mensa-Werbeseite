@@ -1,0 +1,14 @@
+<html>
+<head>
+    <title>{{$title}}</title>
+</head>
+<header>
+    @yield('header')
+</header>
+<main>
+    @yield('main')
+</main>
+<footer>
+    @yield('footer')
+</footer>
+</html>
