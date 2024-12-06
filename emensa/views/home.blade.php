@@ -17,7 +17,7 @@
         </ul>
     </nav>
     <footer>
-        &copy; Team-Name DBWT
+        &copy; Team-Name 301
     </footer>
 @endsection
 
