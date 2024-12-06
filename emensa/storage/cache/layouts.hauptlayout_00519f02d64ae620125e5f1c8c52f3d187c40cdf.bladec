@@ -1,0 +1,18 @@
+<!doctype html>
+<html class="no-js" lang="DE">
+<head>
+ <meta charset="utf-8">
+ <title>E-Mensa</title>
+ <link rel="stylesheet" href="css/emensa.css">
+</head>
+<body>
+<?php echo $this->yieldContent("header"); ?>
+
+<main class="grid-3">
+<?php echo $this->yieldContent("begrüßungstext"); ?>
+
+<?php echo $this->yieldContent("gerichte"); ?>
+</main>
+<?php echo $this->yieldContent("footer"); ?>
+</body>
+</html>
