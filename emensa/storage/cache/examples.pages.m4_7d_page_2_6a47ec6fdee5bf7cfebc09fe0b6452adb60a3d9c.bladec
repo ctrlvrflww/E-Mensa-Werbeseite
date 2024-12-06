@@ -1,0 +1,18 @@
+<?php $_shouldextend[1]=1; ?>
+
+<?php $this->startSection('header'); ?>
+ <br>
+ Ich bin der Kopf von Seite 2
+ <br>
+<?php $this->stopSection(); ?>
+<?php $this->startSection('main'); ?>
+ <br>
+ middle
+ <br>
+<?php $this->stopSection(); ?>
+<?php $this->startSection('footer'); ?>
+ <br>
+ end of everything
+ <br>
+<?php $this->stopSection(); ?>
+<?php if (isset($_shouldextend[1])) { echo $this->runChild('examples.layout.m4_7d_layout'); } ?>
