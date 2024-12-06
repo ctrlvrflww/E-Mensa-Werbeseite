@@ -200,6 +200,8 @@ mysqli_close($link);
                 <tr><td><?php echo $allergen['name']?></td><td><?php echo $allergen['code'] ?></td></tr>
                 <?php endforeach;?>
             </table>
+            <br>
+            <a href="wunschgericht.php" >Teilen sie ihr Wunschgericht mit uns</a>
         </div>
         <div class="mitte" id="zahlen">
             <h2>E-Mensa in Zahlen</h2>
