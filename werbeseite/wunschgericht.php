@@ -146,9 +146,10 @@ if (isset($_POST['name'])) {
             $wunschgericht->close();
             $erstellerin_wunsch->close();
 
-            echo "<br> Ihre Daten wurden gespeichert :) <br>";
+            echo "<br>Ihre Daten wurden gespeichert :) <br>";
     }
 }
 ?>
+    <br>
     <a href="werbeseite.php">Zurück zur Hauptseite</a>
 </main>

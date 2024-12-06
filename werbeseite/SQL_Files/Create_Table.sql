@@ -22,20 +22,20 @@ CREATE TABLE kategorie (
         name varchar(80) not null ,
         eltern_id int8,
         bildname varchar(200),
-        FOREIGN KEY (eltern_id) REFERENCES kategorie(id)
+        CONSTRAINT e_id FOREIGN KEY (eltern_id) REFERENCES kategorie(id)
 );
 
 CREATE TABLE gericht_hat_allergen (
        code char(4),
        gericht_id int8 not null,
-       FOREIGN KEY (code) REFERENCES allergen(code),
-       FOREIGN KEY (gericht_id) REFERENCES gericht(id)
+       CONSTRAINT al_code FOREIGN KEY (code) REFERENCES allergen(code),
+       CONSTRAINT gea_id FOREIGN KEY (gericht_id) REFERENCES gericht(id)
 );
 CREATE TABLE gericht_hat_kategorie (
         gericht_id int8 not null ,
         kategorie_id int8 not null,
-        FOREIGN KEY (kategorie_id) REFERENCES kategorie(id),
-        FOREIGN KEY (gericht_id) REFERENCES gericht(id)
+        CONSTRAINT kat_id FOREIGN KEY (kategorie_id) REFERENCES kategorie(id),
+        CONSTRAINT gek_id FOREIGN KEY (gericht_id) REFERENCES gericht(id)
 );
 
 CREATE TABLE newsletter_anmeldungen(
