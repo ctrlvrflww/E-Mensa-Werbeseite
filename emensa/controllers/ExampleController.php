@@ -11,7 +11,7 @@ class ExampleController
         */
         $name = $rd->query['name'];
 
-        return view('notimplemented', [
+        return view('examples.m4_7a_queryparameter', [
             'request'=>$rd,
             'url' => 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}",
             'name' => $name

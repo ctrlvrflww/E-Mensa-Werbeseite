@@ -112,7 +112,7 @@ if (isset($_POST['name'])) {
         echo "<p class='red'>Bitte geben Sie eine gültige Mail-Adresse ein</p>";
     }
     else {
-            $link = new mysqli("localhost", "root", "Tonihoni04!", "emensawerbeseite");
+            $link = new mysqli("localhost", "root", "SWE24", "emensawerbeseite");
 
             $wunschgericht = $link->prepare("INSERT INTO wunschgerichte (name, beschreibung, datum) VALUE (?, ?, ?);");
             $wunschgericht->bind_param("sss", $gerichtname, $beschreibung, $date);

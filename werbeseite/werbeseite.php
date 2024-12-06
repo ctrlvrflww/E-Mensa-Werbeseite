@@ -14,7 +14,7 @@ $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 $link=mysqli_connect("localhost",   // Host der Datenbank
     "root",                         // Benutzername zur Anmeldung
-    "Tonihoni04!",                  // Passwort
+    "SWE24",                  // Passwort
     "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
 );
 
@@ -210,7 +210,7 @@ mysqli_close($link);
                 <li><?php
                     $link = mysqli_connect("localhost",   // Host der Datenbank
                         "root",                         // Benutzername zur Anmeldung
-                        "Tonihoni04!",                  // Passwort
+                        "SWE24",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
                     );
 
@@ -304,7 +304,7 @@ mysqli_close($link);
                 else {
                     $link = mysqli_connect("localhost",   // Host der Datenbank
                         "root",                         // Benutzername zur Anmeldung
-                        "Tonihoni04!",                  // Passwort
+                        "SWE24",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
                     );
 

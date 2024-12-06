@@ -9,7 +9,7 @@
 // Verbindungsdetails
 $servername = "localhost";
 $username = "root";
-$password = "Tonihoni04!";
+$password = "SWE24";
 $dbname = "emensawerbeseite";
 
 // Verbindung herstellen
