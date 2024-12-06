@@ -14,7 +14,7 @@ $http_user_agent = $_SERVER['HTTP_USER_AGENT'];
 
 $link=mysqli_connect("localhost",   // Host der Datenbank
     "root",                         // Benutzername zur Anmeldung
-    "Tonihoni04!",                  // Passwort
+    "SWE24",                  // Passwort
     "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
 );
 
@@ -210,7 +210,7 @@ mysqli_close($link);
                 <li><?php
                     $link = mysqli_connect("localhost",   // Host der Datenbank
                         "root",                         // Benutzername zur Anmeldung
-                        "Tonihoni04!",                  // Passwort
+                        "SWE24",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
                     );
 
@@ -304,7 +304,7 @@ mysqli_close($link);
                 else {
                     $link = mysqli_connect("localhost",   // Host der Datenbank
                         "root",                         // Benutzername zur Anmeldung
-                        "Tonihoni04!",                  // Passwort
+                        "SWE24",                  // Passwort
                         "emensawerbeseite"              // Auswahl der Datenbanken (bzw. des Schemas)
                     );
 
@@ -322,14 +322,19 @@ mysqli_close($link);
                     $bool = mysqli_fetch_assoc($result);
                     if($bool['count'] <= 0)
                     {
-                        $anmeldung = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE ('".$name."','". $mail ."','". $sprache."');";
                         //fügt den Namen, Mail und Sprache in die Datenbank ein
-                        echo "<br> Ihre Daten wurden gespeichert :) <br>";
-                        $result1 = mysqli_query($link, $anmeldung);
-                        if (!$result1) {
-                            echo "Fehler während der Abfrage:  ", mysqli_error($link);
+                        $anmeldung_query = "INSERT INTO newsletter_anmeldungen (name, mail, sprache) VALUE (?,?,?);";
+                        $anmeldung = mysqli_stmt_init($link);
+                        mysqli_stmt_prepare($anmeldung, $anmeldung_query);
+                        mysqli_stmt_bind_param($anmeldung, "sss", $name, $mail, $sprache);
+                        if(mysqli_stmt_execute($anmeldung)){
+                            echo "<br> Ihre Daten wurden gespeichert :) <br>";
+                        } else {
+                            echo "Fehler beim Einfügen: ", mysqli_stmt_error($anmeldung);
                             exit();
                         }
+
+                        mysqli_stmt_close($anmeldung);
                     }
                     else {echo "<br> <p class='red'> Die von ihnen eingegebener Mail-Adresse ist schon angemeldet. </p>";}
                     mysqli_free_result($result);
