@@ -47,7 +47,7 @@
         <div class="mitte">
             <ul class="horizontal">
                 <li>(c) E-mensa GmbH</li>
-                <li> Ihr Name hier</li>
+                <li> Anton und Louis</li>
                 <li><a href="Lasagne.jpg">Impressum</a></li>
             </ul>
         </div>
