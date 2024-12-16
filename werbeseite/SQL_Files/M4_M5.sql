@@ -53,3 +53,5 @@ ON UPDATE CASCADE;
 -- 6) Eine Kombination aus gericht_id und kategorie_id in gericht_hat_kategorie soll als Primärschlüssel dienen
 ALTER TABLE gericht_hat_kategorie
 Add CONSTRAINT PRIMARY KEY (gericht_id, kategorie_id);
+
+ALTER TABLE gericht ADD COLUMN bildname varchar(200) default null; -- Name der Bilddatei
