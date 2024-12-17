@@ -29,12 +29,19 @@
         <h2>Köstlichkeiten, die Sie erwarten</h2>
         <!--<p>aktuelle Sortierung:</p> <?php echo "order:". $orderby . " Reihenfolge: " . $direction?> -->
         <table>
-            <tr><th>Name</th><th>Preis intern</th><th>Preis extern</th></tr>
+            <tr><th>Bild</th><th>Name</th><th>Preis intern</th><th>Preis extern</th></tr>
             @foreach ($gerichte as $gericht)
             <tr>
+                <td>
+                    @if(!isset($gericht['bildname']))
+                        <img src="/img/gerichte/00_image_missing.jpg" alt="dateifehler" width="100" height="100">
+                    @else
+                        <img src="/img/gerichte/{{$gericht['bildname']}}" alt="not found" width="100" height="100">
+                    @endif
+                </td>
                 <td>{{$gericht['name']}}</td>
-                <td>{{$gericht['preisintern']}}</td>
-                <td>{{$gericht['preisextern']}}</td>
+                <td>{{$gericht['preisintern']}} €</td>
+                <td>{{$gericht['preisextern']}} €</td>
             </tr>
             @endforeach
         </table>
