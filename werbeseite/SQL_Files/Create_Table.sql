@@ -66,3 +66,16 @@ CREATE TABLE erstellerin_hat_wunschgerichte (
     wunschgerichtnummer int not null REFERENCES wunschgerichte(nummer),
     erstellerin_email varchar(128) not null  REFERENCES erstellerin(email)
 );
+
+CREATE TABLE benutzer (
+    id int8 primary key  unique auto_increment,
+    name varchar(200) not null,
+    email varchar(100) not null unique,
+    passwort varchar(200) not null,
+    admin boolean not null,                     -- Markierung ob es sich um den Adminestrator handelt oder nicht
+    anzahlfehler int not null,                  -- Zähler, wie oft ein fehler bei der Anmeldung gmacht wurde. Standart 0
+    anzahlanmeldungen int not null,             -- Zähler, wie oft eine Anmeldung erfolgreich durchgeführt wurde
+    letzteanmeldung datetime,                   -- Zeitpunkt, der zuletzt erfolgreichen Anmeldung
+    letzterfehler datetime                      -- Zeitpunkt, der zuletzt fehlerhaften Anmeldung
+);
+
