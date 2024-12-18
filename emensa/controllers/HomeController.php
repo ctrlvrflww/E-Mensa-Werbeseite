@@ -20,4 +20,10 @@ class HomeController
             'gerichte' => $gerichte
         ]);
     }
+
+    function anmeldung(RequestData $rd) {
+        return view('main.anmeldung', [
+            'rd' => $rd
+        ]);
+    }
 }

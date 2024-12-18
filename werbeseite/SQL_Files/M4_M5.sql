@@ -60,3 +60,4 @@ ALTER TABLE gericht ADD COLUMN bildname varchar(200) default null; -- Name der B
 
 -- Aufgabe 1 3)
 INSERT INTO benutzer (`name`,`email`,`passwort`, `admin`, `anzahlanmeldungen`) values ('Admin', 'admin@emensa.example', 'SWE24', true, 0);
+UPDATE benutzer SET passwort = '2e06038a6b83c310f17ab46389bebae17db9ced6' WHERE id = 1;
