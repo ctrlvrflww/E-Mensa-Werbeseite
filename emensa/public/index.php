@@ -94,6 +94,7 @@ class FrontController
 
     public static function handleRequest($url, $method = 'GET', $verbosity = 0, $configPath = CONFIG_WEBROUTES)
     {
+        session_start();
         assert_blade(); // check if the class is found
 
         if (!str_contains($url, ':')) $url = $_SERVER['HTTP_HOST'] . ':' . $_SERVER['SERVER_PORT'] . $_SERVER['REQUEST_URI'];

@@ -57,3 +57,6 @@ Add CONSTRAINT PRIMARY KEY (gericht_id, kategorie_id);
 -- M5
 -- Aufgabe 2
 ALTER TABLE gericht ADD COLUMN bildname varchar(200) default null; -- Name der Bilddatei
+
+-- Aufgabe 1 3)
+INSERT INTO benutzer (`name`,`email`,`passwort`, `admin`, `anzahlanmeldungen`) values ('Admin', 'admin@emensa.example', 'SWE24', true, 0);
