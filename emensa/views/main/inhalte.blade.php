@@ -11,7 +11,10 @@
             <a href="#zahlen">Zahlen</a>
             <a href="#kontakt">Kontakt</a>
             <a href="#infos">Wichtige für Uns</a>
+            <a href="/anmeldung">Anmelden</a>
+            <a href="/abmeldung">Abmelden</a>
         </div>
+        <div class="margin-auto">{{$name}}</div>
     </header>
 @endsection
 
@@ -39,7 +42,7 @@
                         <img src="/img/gerichte/{{$gericht['bildname']}}" alt="not found" width="100" height="100">
                     @endif
                 </td>
-                <td>{{$gericht['name']}}</td>
+                <td >{{$gericht['name']}}</td>
                 <td>{{$gericht['preisintern']}} €</td>
                 <td>{{$gericht['preisextern']}} €</td>
             </tr>

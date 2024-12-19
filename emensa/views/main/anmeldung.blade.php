@@ -8,7 +8,7 @@
             <br>
             <br>
             <label for="passwort" >Passwort: </label>
-            <input type="text" id="passwort" name="passwort" placeholder="Geben sie ihr Passwort ein" size="25" required>
+            <input type="password" id="passwort" name="passwort" placeholder="Geben sie ihr Passwort ein" size="25" required>
             <input type="submit" id="submit" name="anmeldung" value="Anmelden">
             <br>
             <div class="red">{{$error}}</div>

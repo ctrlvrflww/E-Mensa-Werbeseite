@@ -1,6 +1,9 @@
 * {
     font-family: Arial;
 }
+.margin-auto{
+    margin: auto;
+}
 .grid-3 {
     grid-template-columns: 15% auto auto;
     display: grid;

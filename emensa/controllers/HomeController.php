@@ -19,10 +19,13 @@ class HomeController
 
     function main(RequestData $rd): string
     {
+        $name = "Nicht angemeldet";
+        if(isset($_SESSION['name'])) {$name = $_SESSION['name'];}
         $gerichte = db_gericht_select_above2();
         return view('main.inhalte', [
             'rd' => $rd,
-            'gerichte' => $gerichte
+            'gerichte' => $gerichte,
+            'name' => $name
         ]);
     }
 
@@ -33,9 +36,15 @@ class HomeController
         ]);
     }
 
+    function abmeldung(RequestData $rd): string
+    {
+        if (isset($_SESSION['name'])) {unset($_SESSION['name']);}
+        header('Location: /');
+        exit();
+    }
+
     function anmeldungVerifizieren(RequestData $rd): string
     {
-        $gerichte = db_gericht_select_above2();
         $email = $rd->getPostData()['email'];
         $passwort = $rd->getPostData()['passwort'];
         $salt = "emensa";
@@ -43,10 +52,9 @@ class HomeController
         if(isset($pass [0] ['email'])) {
             if (sha1($salt.$passwort) == $pass [0]['passwort']) {
                 incrementAnmeldung($pass[0]['email']);
-                return view('main.inhalte', [
-                    'rd' => $rd,
-                    'gerichte' => $gerichte
-                ]);
+                $_SESSION['name'] = $pass[0]['name'];
+                header('Location: /');
+                exit();
             }
             else {
                 $error = "Falsches Passwort";
