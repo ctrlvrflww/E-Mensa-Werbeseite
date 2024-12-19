@@ -35,14 +35,17 @@ class HomeController
 
     function anmeldungVerifizieren(RequestData $rd): string
     {
+        $gerichte = db_gericht_select_above2();
         $email = $rd->getPostData()['email'];
         $passwort = $rd->getPostData()['passwort'];
         $salt = "emensa";
         $pass = db_loginVerify($email);
-        if(isset($pass['email'])) {
-            if (sha1($salt.$passwort) == $pass['passwort']) {
+        if(isset($pass [0] ['email'])) {
+            if (sha1($salt.$passwort) == $pass [0]['passwort']) {
+                incrementAnmeldung($pass[0]['email']);
                 return view('main.inhalte', [
-                    'rd' => $rd
+                    'rd' => $rd,
+                    'gerichte' => $gerichte
                 ]);
             }
             else {

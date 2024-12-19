@@ -10,3 +10,13 @@ function db_loginVerify($email){
     $string->close();
     return $pass;
 }
+
+function incrementAnmeldung($email)
+{
+    $link = connectdb();
+    $string = $link->prepare("CALL inkrementAnmeldung(?)");
+    $string->bind_param("s", $email);
+    $string->execute();
+    $string->close();
+    return $string;
+}
