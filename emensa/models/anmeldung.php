@@ -1,14 +1,12 @@
 <?php
-function db_loginVerify(RequestData $rd){
-    $email = $rd->getPostData()['email'];
-    $passwort = $rd->getPostData()['passwort'];
-    $salt = "emensa";
+function db_loginVerify($email){
     $link = connectdb();
 
     $string = $link->prepare("SELECT * FROM benutzer WHERE email = (?)");
     $string->bind_param("s", $email);
     $string->execute();
-    $pass = mysqli_query($link, $string);
+    $string = $string->get_result();
+    $pass = mysqli_fetch_all($string, MYSQLI_BOTH);
     $string->close();
     return $pass;
 }

@@ -13,20 +13,11 @@ CREATE VIEW view_anmeldung AS
 
 /* SQL View die alle vegetarischen Gerichte, sowie die zugehörigen Kategorien zeigt. Kategorien werden dargestellt, auch wenn einer Kategorie kein Gericht zugeordnet ist*/
 CREATE OR REPLACE VIEW view_kategoriegerichte_vegetarisch AS
-       SELECT
-        k.id AS kategorie_id,
-        k.name AS kategorie_name,
-        g.id AS gericht_id,
-        g.name AS gericht_name
-       FROM
-        kategorie k
-       LEFT JOIN
-        gericht_hat_kategorie ghk
-       ON
-        k.id = ghk.kategorie_id
-       LEFT JOIN
-        gericht g
-       ON
-        ghk.gericht_id = g.id AND g.vegetarisch = TRUE;
-
+SELECT gericht.name, kategorie.name as kategorie FROM kategorie
+    left join gericht_hat_kategorie ON kategorie.id = kategorie_id
+    left join gericht ON gericht.id = gericht_id WHERE gericht.name is NULL
+union distinct
+SELECT gericht.name, kategorie.name as kategorie FROM gericht
+    left join gericht_hat_kategorie ON gericht.id = gericht_id
+    left join kategorie ON kategorie_id = kategorie.id Where vegetarisch = 1;
 /*TODO: Louis: (optional) 4 d)*/

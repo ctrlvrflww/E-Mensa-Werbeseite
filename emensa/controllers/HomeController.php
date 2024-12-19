@@ -1,20 +1,24 @@
 <?php
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gerichte_m4_7c.php');
+require_once ($_SERVER['DOCUMENT_ROOT'].'/../models/anmeldung.php');
 
 /* Datei: controllers/HomeController.php */
 class HomeController
 {
-    public function index(RequestData $request) {
+    public function index(RequestData $request): string
+    {
         logger()->info('Zugriff Hauptseite');
         return view('home', ['rd' => $request ]);
     }
     
-    public function debug(RequestData $request) {
+    public function debug(RequestData $request): string
+    {
         return view('debug');
     }
 
-    function main(RequestData $rd) {
+    function main(RequestData $rd): string
+    {
         $gerichte = db_gericht_select_above2();
         return view('main.inhalte', [
             'rd' => $rd,
@@ -22,16 +26,20 @@ class HomeController
         ]);
     }
 
-    function anmeldung(RequestData $rd) {
+    function anmeldung(RequestData $rd): string
+    {
         return view('main.anmeldung', [
             'rd' => $rd
         ]);
     }
 
-    function anmeldungVerifizieren(RequestData $rd)
+    function anmeldungVerifizieren(RequestData $rd): string
     {
-
-        if($email == $pass['email']) {
+        $email = $rd->getPostData()['email'];
+        $passwort = $rd->getPostData()['passwort'];
+        $salt = "emensa";
+        $pass = db_loginVerify($email);
+        if(isset($pass['email'])) {
             if (sha1($salt.$passwort) == $pass['passwort']) {
                 return view('main.inhalte', [
                     'rd' => $rd
@@ -52,10 +60,5 @@ class HomeController
                 'error' => $error
             ]);
         }
-        $error = "Error";
-        return view('main.anmeldung', [
-            'rd' => $rd,
-            'error' => $error
-        ]);
     }
 }
