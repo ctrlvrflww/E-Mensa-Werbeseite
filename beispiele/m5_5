@@ -1,3 +1,6 @@
+/* Um Konflikte im Procedure zu vermeiden verwendet man Delimiter:
+   Wenn man Semikolon innerhalb des Procedures verwendet, kann es zu Konflikten kommen,
+   wenn man das SQL Statement beenden moechte*/
 DELIMITER $$
 
 /* Datenbank-Prozedur, die den Zähler bei einer Anmeldung in der Tabelle "benutzer" inkrementiert */
