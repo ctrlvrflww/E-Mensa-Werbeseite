@@ -6,6 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gerichte_m4_7c.php');
 class HomeController
 {
     public function index(RequestData $request) {
+        logger()->info('Zugriff Hauptseite');
         return view('home', ['rd' => $request ]);
     }
     

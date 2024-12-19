@@ -5,6 +5,9 @@ const CONFIG_WEBROUTES = "/../routes/web.php"; // like in laravel
 const CONFIG_DB = "/../config/db.php";
 const ROUTER_VERSION = '0.8.2';
 
+use Monolog\Logger;
+use Monolog\Handler\StreamHandler;
+
 assert_php_version('8.2.0');
 assert_path();
 
@@ -335,4 +338,17 @@ function assert_blade(): void
                 </div>");
         exit(1);
     }
+}
+
+$logger = null;
+function logger(): Logger{
+    global $logger;
+    if($logger === null) {
+    $logDir = __DIR__ .'/../storage/logs';
+    $logFile = $logDir . './app' . date('Y-m-d') . '.log';
+
+    $logger = new Logger('app');
+    $logger->pushHandler(new StreamHandler($logFile,Logger::INFO));
+    }
+    return $logger;
 }
