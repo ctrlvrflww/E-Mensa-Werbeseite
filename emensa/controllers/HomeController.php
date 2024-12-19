@@ -51,6 +51,7 @@ class HomeController
         $pass = db_loginVerify($email);
         if(isset($pass [0] ['email'])) {
             if (sha1($salt.$passwort) == $pass [0]['passwort']) {
+                logger()->info("Erfolgreiche Anmeldung");
                 incrementAnmeldung($pass[0]['email']);
                 $_SESSION['name'] = $pass[0]['name'];
                 header('Location: /');
@@ -58,6 +59,7 @@ class HomeController
             }
             else {
                 $error = "Falsches Passwort";
+                logger()->warning("Fehlgeschlagene Anmeldung (Passwort)");
                 return view('main.anmeldung', [
                     'rd' => $rd,
                     'error' => $error
@@ -66,6 +68,7 @@ class HomeController
         }
         else {
             $error = "E-Mail Adresse ist nicht korrekt";
+            logger()->warning("Fehlgeschlagene Anmeldung (E-Mail)");
             return view('main.anmeldung', [
                 'rd' => $rd,
                 'error' => $error
