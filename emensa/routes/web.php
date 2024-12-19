@@ -9,6 +9,7 @@
 return array(
     '/'             => "HomeController@main",
     '/anmeldung'    => "HomeController@anmeldung",
+    '/anmeldung-verifizieren' => "HomeController@anmeldungVerifizieren",
     "/demo"         => "DemoController@demo",
     '/dbconnect'    => 'DemoController@dbconnect',
     '/debug'        => 'HomeController@debug',

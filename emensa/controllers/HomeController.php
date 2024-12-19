@@ -27,4 +27,35 @@ class HomeController
             'rd' => $rd
         ]);
     }
+
+    function anmeldungVerifizieren(RequestData $rd)
+    {
+
+        if($email == $pass['email']) {
+            if (sha1($salt.$passwort) == $pass['passwort']) {
+                return view('main.inhalte', [
+                    'rd' => $rd
+                ]);
+            }
+            else {
+                $error = "Falsches Passwort";
+                return view('main.anmeldung', [
+                    'rd' => $rd,
+                    'error' => $error
+                ]);
+            }
+        }
+        else {
+            $error = "E-Mail Adresse ist nicht korrekt";
+            return view('main.anmeldung', [
+                'rd' => $rd,
+                'error' => $error
+            ]);
+        }
+        $error = "Error";
+        return view('main.anmeldung', [
+            'rd' => $rd,
+            'error' => $error
+        ]);
+    }
 }

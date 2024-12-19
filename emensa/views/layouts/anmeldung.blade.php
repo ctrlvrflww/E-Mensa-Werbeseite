@@ -7,10 +7,8 @@
 </head>
 <body>
 @yield("header")
-<main class="grid-middle">
-    <div class="center">
-        @yield("main")
-    </div>
+<main class="center">
+    @yield("main")
 </main>
 @yield("footer")
 </body>
