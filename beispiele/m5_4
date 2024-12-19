@@ -28,3 +28,5 @@ CREATE OR REPLACE VIEW view_kategoriegerichte_vegetarisch AS
         gericht g
        ON
         ghk.gericht_id = g.id AND g.vegetarisch = TRUE;
+
+/*TODO: Louis: (optional) 4 d)*/

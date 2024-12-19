@@ -1,0 +1,13 @@
+
+/* Datenbank-Prozedur, die den Zähler bei einer Anmeldung in der Tabelle "benutzer" inkrementiert */
+CREATE PROCEDURE inkrementAnmeldung (
+    IN benutzer_id BIGINT
+)
+BEGIN
+UPDATE benutzer
+SET anzahlanmeldungen = anzahlanmeldungen + 1
+WHERE id = benutzer_id;
+end;
+
+/*TODO: Louis: 5 b) Prozedur während der Anmeldung aus der Anwednung heraus aufrufen*/
+/*TODO: Louis: 5 c) Überlegen welche Prozeduren bei der E-Mensa noch denkbar wären*/

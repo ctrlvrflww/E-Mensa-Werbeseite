@@ -352,3 +352,4 @@ function logger(): Logger{
     }
     return $logger;
 }
+/*TODO: Louis: logger() Funktion bei fehlgeschlagenen Anmeldungen und bei An- und Abmeldungen dokumentieren -> 3.4.a) und 3.4.b)*/
