@@ -12,7 +12,7 @@
 namespace Composer;
 
 $GLOBALS['_composer_bin_dir'] = __DIR__;
-$GLOBALS['_composer_autoload_path'] = __DIR__ . '/vendor' .'/autoload.php';
+$GLOBALS['_composer_autoload_path'] = __DIR__ . '/..'.'/autoload.php';
 
 
-return include __DIR__ . '/vendor' .'/eftec/bladeone/lib/bladeonecli';
+return include __DIR__ . '/..'.'/eftec/bladeone/lib/bladeonecli';
