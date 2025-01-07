@@ -44,35 +44,57 @@ class HomeController
         exit();
     }
 
+    /**
+     * @throws Exception
+     */
     function anmeldungVerifizieren(RequestData $rd): string
     {
         $email = $rd->getPostData()['email'];
         $passwort = $rd->getPostData()['passwort'];
         $salt = "emensa";
-        $pass = db_loginVerify($email);
-        if(isset($pass [0] ['email'])) {
-            if (sha1($salt.$passwort) == $pass [0]['passwort']) {
-                logger()->info("Erfolgreiche Anmeldung");
-                incrementAnmeldung($pass[0]['email']);
-                updateTime($pass[0]['email']);
-                $_SESSION['name'] = $pass[0]['name'];
-                header('Location: /');
-                exit();
+
+        $link = connectdb();
+        mysqli_begin_transaction($link);
+
+        $pass = db_loginVerify($link,$email);
+
+        try {
+            if(isset($pass [0] ['email'])) {
+                if (sha1($salt.$passwort) == $pass [0]['passwort']) {
+                    //logger()->info("Erfolgreiche Anmeldung");
+                    incrementAnmeldung($link,$pass[0]['email']);
+                    updateTime($link, $pass[0]['email']);
+                    $_SESSION['name'] = $pass[0]['name'];
+                    mysqli_commit($link);
+                    header('Location: /');
+                    exit();
+                }
+                else {
+                    updateFail($link, $pass[0]['email']);
+                    $error = "Falsches Passwort";
+                    //logger()->warning("Fehlgeschlagene Anmeldung (Passwort)");
+                    mysqli_commit($link);
+                    return view('main.anmeldung', [
+                        'rd' => $rd,
+                        'error' => $error
+                    ]);
+                }
             }
             else {
-                updateFail($pass[0]['email']);
-                $error = "Falsches Passwort";
-                logger()->warning("Fehlgeschlagene Anmeldung (Passwort)");
+                $error = "E-Mail Adresse ist nicht korrekt";
+                //logger()->warning("Fehlgeschlagene Anmeldung (E-Mail)");
+                mysqli_commit($link);
                 return view('main.anmeldung', [
                     'rd' => $rd,
                     'error' => $error
                 ]);
             }
-        }
-        else {
-            updateFail($pass[0]['email']);
-            $error = "E-Mail Adresse ist nicht korrekt";
-            logger()->warning("Fehlgeschlagene Anmeldung (E-Mail)");
+        } catch (Exception $e) {
+            mysqli_rollback($link);
+            throw $e;
+        } finally {
+            $error = "Anmeldung fehlgeschlagen";
+            mysqli_close($link);
             return view('main.anmeldung', [
                 'rd' => $rd,
                 'error' => $error
