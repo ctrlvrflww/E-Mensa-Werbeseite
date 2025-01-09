@@ -101,4 +101,9 @@ class HomeController
             ]);
         }
     }
+
+    function bewertung(){
+
+
+    }
 }
