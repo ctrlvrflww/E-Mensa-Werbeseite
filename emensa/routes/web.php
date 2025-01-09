@@ -14,6 +14,8 @@ return array(
     '/bewertungen'  => "HomeController@bewertungen",
     '/meinebewertungen' => "HomeController@meinebewertungen",
     '/deletebewertung'    => "HomeController@deletebewertung",
+    '/highlight'    => "HomeController@highlight",
+    '/nohighlight'    => "HomeController@nohighlight",
     '/bewertung-speichern'  => "HomeController@bewertung_speichern",
     '/anmeldung-verifizieren' => "HomeController@anmeldungVerifizieren",
     "/demo"         => "DemoController@demo",

@@ -41,6 +41,10 @@ main {
     border: 2px solid black;
     padding: 5px;
 }
+.highlighted{
+    color: magenta;
+    border: 3px solid mediumpurple;
+}
 table {
     border:2px solid black;
     /*color: darkgrey;*/
@@ -94,6 +98,7 @@ form > .horizontal > li {
     left: 130px;
 }
 footer {
+    margin-top: 40px;
     border-top: 2px solid black;
     text-align: center;
 }

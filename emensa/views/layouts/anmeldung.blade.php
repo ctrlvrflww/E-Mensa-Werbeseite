@@ -10,6 +10,7 @@
 <main class="center">
     @yield("main")
 </main>
+<a href="/">Back to the Homepage</a>
 @yield("footer")
 </body>
 </html>

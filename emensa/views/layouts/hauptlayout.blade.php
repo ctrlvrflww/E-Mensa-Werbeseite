@@ -12,6 +12,8 @@
 @yield("begrüßungstext")
 
 @yield("gerichte")
+
+    @yield("Meinung unserer Gaeste")
 </main>
 @yield("footer")
 </body>

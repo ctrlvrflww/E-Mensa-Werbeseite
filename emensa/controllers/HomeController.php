@@ -23,10 +23,12 @@ class HomeController
         $name = "Nicht angemeldet";
         if(isset($_SESSION['name'])) {$name = $_SESSION['name'];}
         $gerichte = db_gericht_select_above2();
+        $bewertungen = bewertungenlast30();
         return view('main.inhalte', [
             'rd' => $rd,
             'gerichte' => $gerichte,
-            'name' => $name
+            'name' => $name,
+            'bewertungen' => $bewertungen
         ]);
     }
 
@@ -40,6 +42,8 @@ class HomeController
     function abmeldung(RequestData $rd): string
     {
         if (isset($_SESSION['name'])) {unset($_SESSION['name']);}
+        if (isset($_SESSION['id'])) {unset($_SESSION['id']);}
+        if (isset($_SESSION['admin'])) {unset($_SESSION['admin']);}
         header('Location: /');
         logger()->info("Erfolgreiche Abmeldung");
         exit();
@@ -66,6 +70,8 @@ class HomeController
                     incrementAnmeldung($link,$pass[0]['email']);
                     updateTime($link, $pass[0]['email']);
                     $_SESSION['name'] = $pass[0]['name'];
+                    $_SESSION['id'] = $pass[0]['id'];
+                    $_SESSION['admin'] = $pass[0]['admin'];
                     mysqli_commit($link);
                     header('Location: /');
                     exit();
@@ -128,6 +134,19 @@ class HomeController
     {
         $bewertung_id = $rd->getPostData()['data'];
         deletebewertung($bewertung_id);
+        header("Location: /bewertungen");
+    }
+
+    function highlight(RequestData $rd)
+    {
+        $bewertung_id = $rd->getPostData()['highlight'];
+        highlight($bewertung_id);
+        header("Location: /bewertungen");
+    }
+    function nohighlight(RequestData $rd)
+    {
+        $bewertung_id = $rd->getPostData()['highlight'];
+        nohighlight($bewertung_id);
         header("Location: /bewertungen");
     }
 }

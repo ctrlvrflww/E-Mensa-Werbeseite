@@ -52,6 +52,32 @@
     </div>
 @endsection
 
+@section("Meinung unserer Gaeste")
+    <div class="mitte">
+        <h2>Meinung unserer Gäste</h2>
+        <table>
+            <thead>
+            <tr><th>Gericht</th><th>Bewertung</th><th>Bemerkung</th><th>Author</th><!-- <th>Datum</th> --> </tr>
+            </thead>
+            <tbody>
+            @foreach($bewertungen as $bewertung)
+                @if($bewertung[7])
+                    <tr>
+                        <td>{{$bewertung[0]}}</td>
+                        <td>{{$bewertung[1]}}</td>
+                        <td>{{$bewertung[2]}}</td>
+                        <td>{{$bewertung[3]}}</td>
+                       <!-- <td>{{$bewertung[4]}}</td> -->
+                    </tr>
+                @endif
+            @endforeach
+            </tbody>
+        </table>
+        <br>
+        <a href="/bewertungen">Zu den Bewertungen</a>
+    </div>
+@endsection
+
 @section("footer")
     <footer class="grid-3" id="kontakt">
         <div class="mitte">
