@@ -14,6 +14,12 @@
                         <td>{{$bewertung[2]}}</td>
                         <td>{{$bewertung[3]}}</td>
                         <td>{{$bewertung[4]}}</td>
+                        <td>@if($bewertung[5] == $_SESSION['id'])
+                                <form method="post" action="/deletebewertung">
+                                    <input type="hidden" name="data" value="{{$bewertung[6]}}">
+                                    <input type="submit" name="löschen" value="Löschen">
+                                </form>
+                            @endif</td>
                     </tr>
                 @endforeach
             </tbody>

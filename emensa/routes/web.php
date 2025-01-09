@@ -13,6 +13,7 @@ return array(
     '/bewertung'    => "HomeController@bewertung",
     '/bewertungen'  => "HomeController@bewertungen",
     '/meinebewertungen' => "HomeController@meinebewertungen",
+    '/deletebewertung'    => "HomeController@deletebewertung",
     '/bewertung-speichern'  => "HomeController@bewertung_speichern",
     '/anmeldung-verifizieren' => "HomeController@anmeldungVerifizieren",
     "/demo"         => "DemoController@demo",

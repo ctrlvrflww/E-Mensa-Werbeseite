@@ -123,4 +123,11 @@ class HomeController
             'bewertungen' => $bewertungen
         ]);
     }
+
+    function deletebewertung(RequestData $rd)
+    {
+        $bewertung_id = $rd->getPostData()['data'];
+        deletebewertung($bewertung_id);
+        header("Location: /bewertungen");
+    }
 }
