@@ -2,6 +2,7 @@
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gericht.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/../models/gerichte_m4_7c.php');
 require_once ($_SERVER['DOCUMENT_ROOT'].'/../models/anmeldung.php');
+require_once ($_SERVER['DOCUMENT_ROOT'].'/../models/bewertung.php');
 
 /* Datei: controllers/HomeController.php */
 class HomeController
@@ -66,7 +67,15 @@ class HomeController
                     updateTime($link, $pass[0]['email']);
                     $_SESSION['name'] = $pass[0]['name'];
                     mysqli_commit($link);
-                    header('Location: /');
+
+                    if(isset($_SESSION['redirect_after_login'])) {
+                        $redirect = $_SESSION['redirect_after_login'];
+                        unset($_SESSION['redirect_after_login']);
+                        header("Location: /$redirect");
+                    } else {
+                        header('Location: /');
+                    }
+
                     exit();
                 }
                 else {
@@ -103,7 +112,22 @@ class HomeController
     }
 
     function bewertung(){
+        if(!isset($_SESSION['name'])) {
+            $_SESSION['redirect_after_login'] = 'bewertung';
+            return view('main.anmeldung');
+            exit;
+        } else {
+            return view('main.bewertung');
+        }
 
+    }
 
+    function bewertung_speichern(RequestData $rd){
+        $sterne = $rd->getPostData()['Sterne'];
+        $bemerkung = $rd->getPostData()['bemerkung'];
+
+        $link = connectdb();
+        insert_review($link,$sterne,$bemerkung);
+        header('Location: /');
     }
 }

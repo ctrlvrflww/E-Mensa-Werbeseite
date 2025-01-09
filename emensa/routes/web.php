@@ -11,6 +11,7 @@ return array(
     '/anmeldung'    => "HomeController@anmeldung",
     '/abmeldung'    => "HomeController@abmeldung",
     '/bewertung'    => "HomeController@bewertung",
+    '/bewertung-speichern'  => "HomeController@bewertung_speichern",
     '/anmeldung-verifizieren' => "HomeController@anmeldungVerifizieren",
     "/demo"         => "DemoController@demo",
     '/dbconnect'    => 'DemoController@dbconnect',
