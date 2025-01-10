@@ -29,7 +29,7 @@ class HomeController
             'rd' => $rd,
             'gerichte' => $gerichte,
             'name' => $name,
-            'bewertungen' => $bewertungen
+            'bewertungen' => $bewertungen,
         ]);
     }
 
@@ -157,20 +157,34 @@ class HomeController
             $_SESSION['redirect_review']="bewertung";
             return view('main.anmeldung');
         }
-        else {return view('main.bewertung');}
+        else {
+            $gericht_id = $_GET['gerichtid'];
+            $link = connectdb();
+
+            $gericht_row = get_gericht($link,$gericht_id);
+
+            if ($row = $gericht_row->fetch_assoc()) {
+                $name = $row['name'];
+                $bildname = $row['bildname'];
+            }
+
+            return view('main.bewertung',
+                ['gericht_id' => $gericht_id,
+                    'name'=>$name,
+                    'bildname'=>$bildname]);
+
+        }
     }
 
     function bewertung_speichern(RequestData $rd){
         $sterne = $rd->getPostData()['Sterne'];
         $bemerkung = $rd->getPostData()['bemerkung'];
+        $gericht_id = $rd->getGetData()['gerichtid'];
 
-        if(isset($_GET['gerichtid'])) {
-            $gericht_id = $_GET['gerichtid'];
-            $link = connectdb();
-            insert_review($link,$sterne,$bemerkung,$gericht_id);
-            header("Location: /");
+        $link = connectdb();
+        insert_review($link,$sterne,$bemerkung,$gericht_id);
+        header("Location: /");
 
-        }
 
 
     }

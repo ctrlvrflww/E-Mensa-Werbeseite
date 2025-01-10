@@ -45,7 +45,7 @@
                 <td >{{$gericht['name']}}
                     @if(isset($_SESSION['name']))
                         <br>
-                        <a href="/bewertung?gerichtid={{$gericht['gerichtid']}}">Jetzt Bewerten!</a>
+                        <a href="/bewertung?gerichtid={{$gericht['id']}}">Jetzt Bewerten!</a>
                     @endif
                 </td>
                 <td>{{$gericht['preisintern']}} €</td>

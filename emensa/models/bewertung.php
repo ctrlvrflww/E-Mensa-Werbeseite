@@ -8,3 +8,14 @@ function insert_review($link,$sterne,$bemerkung,$gericht_id){
 
     $string->close();
 }
+
+function get_gericht($link, $gericht_id){
+
+    $string = $link->prepare("SELECT name, bildname FROM gericht WHERE id = ?");
+    $string->bind_param("i", $gericht_id);
+    $string->execute();
+
+    $result = $string->get_result();
+
+    return $result;
+}

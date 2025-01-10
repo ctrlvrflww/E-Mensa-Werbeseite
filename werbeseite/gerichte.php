@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
                 "preisintern" => $row["preisintern"],
                 "preisextern" => $row["preisextern"],
                 "code" => $row["code"],
-                "gerichtid"  => $row["id"]
+                "id"  => $row["id"]
         ];
     }
 } else {
