@@ -181,8 +181,10 @@ class HomeController
         $bemerkung = $rd->getPostData()['bemerkung'];
         $gericht_id = $rd->getGetData()['gerichtid'];
 
+        $user_id = $_SESSION['id'];
+
         $link = connectdb();
-        insert_review($link,$sterne,$bemerkung,$gericht_id);
+        insert_review($link,$sterne,$bemerkung,$gericht_id,$user_id);
         header("Location: /");
 
 
