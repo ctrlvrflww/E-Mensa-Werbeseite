@@ -37,8 +37,8 @@ if (!in_array($direction, $allowed_orderdirec)) { // ist der Wert aus $direction
     $direction = 'asc';
 }
 
-// SQL Abfrage für Name, Preis-Intern und Preis-Extern und Order
-$sql = "SELECT DISTINCT ger.name,ger.preisintern,ger.preisextern,ger_all.code
+// SQL Abfrage für Name, Preis-Intern und Preis-Extern und Order und ID
+$sql = "SELECT DISTINCT ger.name,ger.preisintern,ger.preisextern,ger_all.code, ger.id
         FROM gericht AS ger
         LEFT JOIN gericht_hat_allergen AS ger_all
         ON ger.id = ger_all.gericht_id
@@ -58,7 +58,8 @@ if ($result->num_rows > 0) {
                 "name" => $row["name"],
                 "preisintern" => $row["preisintern"],
                 "preisextern" => $row["preisextern"],
-                "code" => $row["code"]
+                "code" => $row["code"],
+                "gerichtid"  => $row["id"]
         ];
     }
 } else {

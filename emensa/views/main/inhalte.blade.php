@@ -42,7 +42,12 @@
                         <img src="/img/gerichte/{{$gericht['bildname']}}" alt="not found" width="100" height="100">
                     @endif
                 </td>
-                <td >{{$gericht['name']}}</td>
+                <td >{{$gericht['name']}}
+                    @if(isset($_SESSION['name']))
+                        <br>
+                        <a href="/bewertung?gerichtid={{$gericht['gerichtid']}}">Jetzt Bewerten!</a>
+                    @endif
+                </td>
                 <td>{{$gericht['preisintern']}} €</td>
                 <td>{{$gericht['preisextern']}} €</td>
             </tr>
